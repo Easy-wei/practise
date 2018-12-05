@@ -21,4 +21,3 @@ data1 = data[(data['year_day']==32) & (data['Name']=='JF_2ATC_SC701110_EC')]
 data1 = data1.reset_index(drop=True)
 print (data1)
 a = data1['Value'].sum()
-print (a)
