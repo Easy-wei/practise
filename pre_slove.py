@@ -16,11 +16,11 @@ def day_power(data):
     k=[]
     for i in data['year_day'].unique():
         for j in data[data['year_day']==i]['Name'].unique():
-            print (i,j,round(data[(data['year_day']==i) & (data['Name']==j)]['Value'].sum(),3))
+            #print (i,j,round(data[(data['year_day']==i) & (data['Name']==j)]['Value'].sum(),3))
             k.append( round(data[(data['year_day']==i) & (data['Name']==j)]['Value'].sum(),3))
     return k
 
 data = data.drop_duplicates(['Name','year_day']).reset_index(drop = True)
 data['day_power'] = day_power(data)
 print(data.head(10),'\n',data.tail(10))
-            
+            """  """
