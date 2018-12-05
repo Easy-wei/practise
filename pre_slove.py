@@ -14,9 +14,10 @@ del(data['Data_Time'])
 
 def day_power(data):
     k=[]
-    for i in data['Name'].unique():
-        for j in data[data['Name']==i]['year_day'].unique():
-            k.append( round(data[(data['Name']==i) & (data['year_day']==j)]['Value'].sum(),3))
+    for i in data['year_day'].unique():
+        for j in data[data['year_day']==i]['Name'].unique():
+            print (i,j,round(data[(data['year_day']==i) & (data['Name']==j)]['Value'].sum(),3))
+            k.append( round(data[(data['year_day']==i) & (data['Name']==j)]['Value'].sum(),3))
     return k
 
 data = data.drop_duplicates(['Name','year_day']).reset_index(drop = True)
