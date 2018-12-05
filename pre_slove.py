@@ -14,6 +14,11 @@ data["year_day"] = data.struct_time.apply(lambda x: x[7])# 一年的第几天
 del(data['Data_Time'])
 
 print (data.head(5))
+print (data.iat[0,7])
+print (type(data.iat[0,7]))
 
-
-
+data1 = data[(data['year_day']==32) & (data['Name']=='JF_2ATC_SC701110_EC')]
+data1 = data1.reset_index(drop=True)
+print (data1)
+a = data1['Value'].sum()
+print (a)
