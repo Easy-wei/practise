@@ -17,7 +17,8 @@ def pre_treat(data):
     data["year_day"] = data.struct_time.apply(lambda x: x[7])  # 一年的第几天
     data['month_day'] = data.struct_time.apply(lambda x: time.strftime('%m%d', x))
     #妈的，写了datetime格式为了chinesecalendar的接口，只认datatime格式，靠
-    data['is_workday'] = data.struct_time.apply(lambda x: 0 if is_workday(datetime.fromtimestamp(time.mktime(x))) else 1)
+    data['date'] = data.struct_time.apply(lambda x:datetime.fromtimestamp(time.mktime(x)))
+    data['is_workday'] = data.date.apply(lambda x: 0 if is_workday(x) else 1)
     del(data['Data_Time'])
 
     return data
