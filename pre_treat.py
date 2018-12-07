@@ -2,25 +2,19 @@ import pandas as pd
 import time
 import matplotlib.pyplot as plt
 from chinese_calendar import is_workday
-from datetime import datetime
-
-data1 = pd.read_csv(r"D:\data\201602.csv")
-
+import datetime as dt
 
 def pre_treat(data):
-    del (data["Type"], data["Energysid"], data["Expertsid"], data["compsid"],
+    del (data['RecNo'],data["Type"], data["Energysid"], data["Expertsid"], data["compsid"],
          data["areaenergysid"], data['Equsid'], data['buildingsid'], data['Load_Time'])
     data['struct_time'] = data.Data_Time.apply(lambda x: time.strptime(x, '%d/%m/%Y %H:%M:%S'))
-
     # 得到格式化的struct_time，为以后时间的变化做基础
     data['weekday'] = data.struct_time.apply(lambda x: x[6])  # 0代表周一同理得到其他的日子
-    data["year_day"] = data.struct_time.apply(lambda x: x[7])  # 一年的第几天
     data['month_day'] = data.struct_time.apply(lambda x: time.strftime('%m%d', x))
     #妈的，写了datetime格式为了chinesecalendar的接口，只认datatime格式，靠
-    data['date'] = data.struct_time.apply(lambda x:datetime.fromtimestamp(time.mktime(x)))
+    data['date'] = data.struct_time.apply(lambda x:dt.datetime.fromtimestamp(time.mktime(x)))
     data['is_workday'] = data.date.apply(lambda x: 0 if is_workday(x) else 1)
     del(data['Data_Time'])
-
     return data
 
 def get_date(x):
@@ -44,11 +38,15 @@ def split(data):
 
 # 判断节假日，利用了chinesecalender这个库，来判断是否是工作日，如果是工作日，那么用data里用0标注，否则用1标注
 
-data1 = split(pre_treat(data1))
-print(data1[0].head(20))
-"""
-for j in data1:
-    j.plot(x='month_day', y='day_power')
+def read():
+    for i in range(1701,1713):
+        #path = "d:\data\20"+str(i)+".csv"
+        data1 = pd.read_csv(r"D:\data\20"+str(i)+".csv")
+        data1 = split(pre_treat(data1))
+        for j in range(0,6):
+            fig = data1[j].plot(x='month_day', y='day_power')
+            fig = fig.get_figure()
+            print (j)
+            fig.savefig(r'D:\data\fig\fig_'+str(j)+'_20'+str(i)+'.png')
 
-plt.show()
-"""
+read()
