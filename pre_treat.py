@@ -46,7 +46,6 @@ def read():
         for j in range(0,6):
             fig = data1[j].plot(x='month_day', y='day_power')
             fig = fig.get_figure()
-            print (j)
             fig.savefig(r'D:\data\fig\fig_'+str(j)+'_20'+str(i)+'.png')
 
 read()
