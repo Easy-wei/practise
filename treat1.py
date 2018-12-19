@@ -16,10 +16,11 @@ for i in range(1,len(a)):
 
 data = data.drop_duplicates(['Name','date']).reset_index(drop= True)# 删除重复的，这次没用，保不住以后用到
 
-# 因为在北京，所以默认冬天不开空调，认为夏天才开空调
+# 因为在北京，所以默认冬天不开空调，认为夏天才开空调 最高气温超过28，默认开
 
+data['is_aircond_work'] = data['T_max'].apply(lambda x: 0 if x>28 else 1)
 
-
+print(data.tail())
 
 def save(x):
     for i in x['Name'].unique():
@@ -37,8 +38,8 @@ def save2(x):
         data_x_1 = data_x_1.copy()# 否则会报错
         data_x_1['day_power'] = list_a
         data_x_1.to_csv(r'D:\data\tr1/'+str(i)+'2.csv',index = False)
-
-#save2(data)
+save(data)
+save2(data)
 
 def plot_power(x):
     plt.title(x['Name'][0])
