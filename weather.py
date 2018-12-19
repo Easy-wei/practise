@@ -57,7 +57,7 @@ def split(data):
         del (pd_1['Value'])
         list_2 = []
         for j in pd['month_day'].unique():
-            list_2.append(pd[pd.month_day.isin([j])].Value.sum())
+            list_2.append(pd[pd.month_day.isin([j])].['Value'].sum())
         pd_1 = pd_1.copy()
         pd_1['day_power'] = list_2  # 老是提示这句话用的不合要求，但是能用，我担心这里埋雷,后来加了上面那句copy
         list_1.append(pd_1.reset_index(drop=True))
@@ -73,7 +73,7 @@ def save(list_1):
         j.to_csv(r'D:\data\af_tr\panel_'+str(i)+'_'+str(j.iat[0,5])+'.csv',index= False)
 
 for i in range(10,13):
-    power_data = pd.read_csv(r"D:\data\2017"+str(i)+".csv")
+    power_data = pd.read_csv(r"D:\data\2016"+str(i)+".csv")
     power_data = split(pre_treat(power_data))
     save(power_data)
 
