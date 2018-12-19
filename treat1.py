@@ -4,7 +4,9 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+
 path = r'D:\data\tr/'
+
 
 a = os.listdir(path)
 data = pd.read_csv(path+a[0])

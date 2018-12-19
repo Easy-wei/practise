@@ -8,15 +8,7 @@ import matplotlib.dates as mdates
 
 path = r'D:/data/tr1/'
 
-"""
-def read(path):
-    a = os.listdir(path)
-    data = pd.read_csv(path+a[0])
-    for i in range(1,len(a)):
-        data_t = pd.read_csv(path+a[i])
-        data = pd.concat([data,data_t],axis = 0, ignore_index= True)
-    return data
-"""
+
 data = pd.read_csv(r'D:/data/tr1/6000_month.csv')
 
 #data['month'] = data['date'].apply(lambda x: time.strftime('%Y-%m',time.strptime(x,'%Y-%m-%d')))
@@ -48,7 +40,3 @@ def save(x):
     del (data_t_1['day_power'])
     data_t_1['month_power'] = list_1
     data_t_1.to_csv(r'D:\data\tr1/6000_month.csv',index = False)
-
-
-
-
