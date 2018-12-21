@@ -8,10 +8,9 @@ import matplotlib.dates as mdates
 
 path = r'D:/data/tr1/'
 
+data = pd.read_csv(r'D:/data/tr1/40002.csv')
 
-data = pd.read_csv(r'D:/data/tr1/6000_month.csv')
-
-#data['month'] = data['date'].apply(lambda x: time.strftime('%Y-%m',time.strptime(x,'%Y-%m-%d')))
+data['month'] = data['date'].apply(lambda x: time.strftime('%Y-%m',time.strptime(x,'%Y-%m-%d')))
 
 def to_norm(x,max,mini):
     list_1 = []
@@ -26,11 +25,15 @@ def to_norm(x,max,mini):
         list_1.append(k)
     return list_1
 
-data['month_power_guiyi'] = to_norm(data['month_power'],max(data['month_power']),min(data['month_power']))
+data['T_mean_guiyi'] = to_norm(data['T_mean'],32,-10)
+data['T_max_guiyi'] = to_norm(data['T_max'],38,-2)
+data['T_min_guiyi'] = to_norm(data['T_min'],25,-14)
+data['day_power_guiyi'] = to_norm(data['day_power'],16904,2567)
+#data['month_power_guiyi'] = to_norm(data['month_power'],max(data['month_power']),min(data['month_power']))
 
 
 
-data.to_csv(r'D:\data\tr1/6000_month.csv',index = False)
+#data.to_csv(r'D:\data\tr1/4000_month.csv',index = False)
 
 def save(x):
     list_1 = []
