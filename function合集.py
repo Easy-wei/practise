@@ -62,3 +62,9 @@ concat
 
 #横向合并
 merge
+
+df = df.groupby(['id','name'])[‘score’].mean()
+#这句表示将t按照列id和name进行分组，将分组后的每个组根据score求每个#组score的平均值。
+
+#pandas常用函数
+#https://blog.csdn.net/sxf1061926959/article/details/56280759
