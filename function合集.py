@@ -59,6 +59,10 @@ weather_data_1[['T_mean', 'T_max', 'T_min']] = pd.DataFrame(get_t(weather_data),
 
 # 按照纵向合并
 concat
+for i in range(1,len(a)):
+    data_t = pd.read_csv(path+a[i])
+    data = pd.concat([data,data_t],axis = 0, ignore_index= True)
+
 
 #横向合并
 merge
@@ -68,3 +72,7 @@ df = df.groupby(['id','name'])[‘score’].mean()
 
 #pandas常用函数
 #https://blog.csdn.net/sxf1061926959/article/details/56280759
+
+power_data.drop(['T_mean','T_max','T_min','T_max_guiyi','T_min_guiyi','T_mean_guiyi'],axis = 1,inplace = True)
+
+    data.rename(columns={'day_power':'month_power'},inplace=True)#重命名
