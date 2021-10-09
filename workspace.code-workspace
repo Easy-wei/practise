@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "practise @ theSecondBranch",
+			"uri": "gitlens://thesecondbranch/d:/Code/practise?{\"path\":\"/d:/Code/practise\",\"ref\":\"theSecondBranch\",\"repoPath\":\"d:/Code/practise\"}"
+		}
+	],
+	"settings": {}
+}
