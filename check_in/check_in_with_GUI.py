@@ -13,22 +13,17 @@ job_num_list = [6120170064,    6120180090,    6120170072,    6120104587,    7220
                 6120104312]
 num_name_dict = dict(zip(job_num_list, name_list))  # 工号为键，姓名为值
 
-file_path = r'D:\Code\\'
-df = pd.read_excel(file_path+'data.xlsx')
+df = pd.read_excel("data.xlsx")
 df.drop(df.head(2).index, inplace=True)
 
 data = df.iloc[:, [0, 1, 8]]
 data.columns = ['Job_num', 'name', 'Check_in_time']  # 更新列名称
 data.index = range(len(data))  # 重置索引从0 开始
 
-print(data.iloc[0,:])
-print(data.iloc[0,2].minute)
 month_list = []
 day_list = []
 hour_list = []
 weekday_list = []
-
-
 
 for i in range(0, len(data)):
     month_list.append(data.iloc[i, 2].month)
@@ -42,9 +37,8 @@ data.loc[:, 'hour'] = hour_list
 data.loc[:, 'weekday'] = weekday_list
 
 data1 = data[(data['month'] == cur_month) & (0 <= data['weekday']) & (
-    data['weekday'] <= 5) & (data['hour'] <= 19) & (data['hour'] >= 7)]
+    data['weekday'] <= 5) & (data['hour'] <= 21) & (data['hour'] >= 6)]
 # 按照时间筛选符合条件的打卡，当前月，周一到周五，早上7点-21之间打卡有效
-
 
 
 def statistics(job_num_list, data):
@@ -62,8 +56,10 @@ def statistics(job_num_list, data):
 
 data_write = pd.DataFrame(statistics(job_num_list, data1), columns=[
                           '工号', '姓名', '本月打卡次数', '应发补助'])
-#print(data_write)
-data_write.to_excel(file_path+str(cur_month)+'月统计结果.xlsx', index=False)  # 写到本地文件为excel文件
+data_write.to_excel(str(cur_month)+'月统计结果.xlsx', index=False)  # 写到本地文件为excel文件
+
+#if __name__ =="__main__" :
+
 
 """
 输出陈老师这个月的所有符合要求的打卡，作为示范
