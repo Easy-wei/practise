@@ -1,0 +1,13 @@
+网页：https://blog.csdn.net/weixin_43502949/article/details/101057825
+1.尽量将所有要执行的py文件放在一个大文件夹下(里面允许有多个文件夹)
+
+2.命令行输入pyi-makespec main.py
+
+main.py为Python程序的入口py文件,根据自身项目情况修改
+
+3.现在文件夹下生成了一个main.spec文件和两个文件夹
+
+4.编辑main.spec文件
+5.保存文件，在.spec文件路径下打开命令行，输入pyinstaller -D main.spec
+
+6.生成的exe程序在dist文件夹中，dist文件夹里包含了整个项目所需的代码和环境，可在其他电脑中进行使用。
